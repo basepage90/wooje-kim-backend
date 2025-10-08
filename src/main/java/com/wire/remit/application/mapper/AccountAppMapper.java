@@ -12,10 +12,10 @@ import java.math.BigDecimal;
 @Component
 public class AccountAppMapper {
 
-    public Account toRegisterDomain(RegisterAccountCommand cmd) {
+    public Account toRegisterDomain(RegisterAccountCommand command) {
         return Account.builder()
-                .ownerName(cmd.ownerName())
-                .accountName(cmd.accountName())
+                .ownerName(command.ownerName())
+                .accountName(command.accountName())
                 .balance(Money.of(BigDecimal.ZERO))
                 .status(AccountStatus.ACTIVE)
                 .build();

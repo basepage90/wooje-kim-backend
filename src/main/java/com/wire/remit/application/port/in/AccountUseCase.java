@@ -4,7 +4,7 @@ import com.wire.remit.application.dto.command.RegisterAccountCommand;
 import com.wire.remit.application.dto.result.AccountResult;
 
 public interface AccountUseCase {
-    AccountResult register(RegisterAccountCommand cmd);
+    AccountResult register(RegisterAccountCommand command);
 
     void delete(Long accountId);
 }

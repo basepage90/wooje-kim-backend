@@ -50,13 +50,13 @@ public class TransactionService implements TransactionUseCase {
      * 2. 거래내역 생성 -> 거래내역 저장
      */
     @Override
-    public TransactionResult deposit(DepositCommand cmd) {
-        Account account = loadAccountPort.findById(cmd.accountId())
+    public TransactionResult deposit(DepositCommand command) {
+        Account account = loadAccountPort.findById(command.accountId())
                 .orElseThrow(() -> new DomainException(ErrorCode.ACCOUNT_NOT_FOUND));
-        account.deposit(Money.of(cmd.amount()));
+        account.deposit(Money.of(command.amount()));
         saveAccountPort.save(account);
 
-        Transaction transaction = mapper.toDomain(account.getId(), cmd.amount(), TransactionType.DEPOSIT);
+        Transaction transaction = mapper.toDomain(account.getId(), command.amount(), TransactionType.DEPOSIT);
         saveTransactionPort.save(transaction);
         return mapper.toResult(transaction);
     }
@@ -67,15 +67,15 @@ public class TransactionService implements TransactionUseCase {
      * 2. 거래내역 생성 -> 거래내역 저장
      */
     @Override
-    public TransactionResult withdraw(WithdrawCommand cmd) {
-        Account account = loadAccountPort.findById(cmd.accountId())
+    public TransactionResult withdraw(WithdrawCommand command) {
+        Account account = loadAccountPort.findById(command.accountId())
                 .orElseThrow(() -> new DomainException(ErrorCode.ACCOUNT_NOT_FOUND));
         BigDecimal todaySum = loadTransactionPort.calculateTodayAmount(account.getId(), TransactionType.WITHDRAW);
-        dailyLimitPolicy.checkWithdrawLimit(Money.of(todaySum), Money.of(cmd.amount()));
-        account.withdraw(Money.of(cmd.amount()));
+        dailyLimitPolicy.checkWithdrawLimit(Money.of(todaySum), Money.of(command.amount()));
+        account.withdraw(Money.of(command.amount()));
         saveAccountPort.save(account);
 
-        Transaction transaction = mapper.toDomain(account.getId(), cmd.amount(), TransactionType.WITHDRAW);
+        Transaction transaction = mapper.toDomain(account.getId(), command.amount(), TransactionType.WITHDRAW);
         saveTransactionPort.save(transaction);
 
         return mapper.toResult(transaction);
@@ -87,26 +87,26 @@ public class TransactionService implements TransactionUseCase {
      * 2. 출금거래내역, 수수료거래내역, 입금거래내역 생성 -> 거래내역 저장
      */
     @Override
-    public TransactionResult transfer(TransferCommand cmd) {
+    public TransactionResult transfer(TransferCommand command) {
         // account section
-        Account source = loadAccountPort.findById(cmd.sourceAccountId())
+        Account source = loadAccountPort.findById(command.sourceAccountId())
                 .orElseThrow(() -> new DomainException(ErrorCode.ACCOUNT_NOT_FOUND, "출금계좌 없음"));
-        Account target = loadAccountPort.findById(cmd.targetAccountId())
+        Account target = loadAccountPort.findById(command.targetAccountId())
                 .orElseThrow(() -> new DomainException(ErrorCode.ACCOUNT_NOT_FOUND, "입금게좌 없음"));
 
         BigDecimal todaySum = loadTransactionPort.calculateTodayAmount(source.getId(), TransactionType.TRANSFER_OUT);
-        dailyLimitPolicy.checkTransferLimit(Money.of(todaySum), Money.of(cmd.amount()));
+        dailyLimitPolicy.checkTransferLimit(Money.of(todaySum), Money.of(command.amount()));
 
-        Money fee = feePolicy.transferFee(Money.of(cmd.amount()));
-        transferDomainService.transfer(source, target, Money.of(cmd.amount()), fee);
+        Money fee = feePolicy.transferFee(Money.of(command.amount()));
+        transferDomainService.transfer(source, target, Money.of(command.amount()), fee);
 
         saveAccountPort.save(source);
         saveAccountPort.save(target);
 
         // transaction section
-        Transaction outTx = mapper.toDomain(source.getId(), cmd.amount(), TransactionType.TRANSFER_OUT);
-        Transaction feeTx = mapper.toDomain(source.getId(), cmd.amount(), TransactionType.FEE);
-        Transaction inTx = mapper.toDomain(target.getId(), cmd.amount(), TransactionType.TRANSFER_IN);
+        Transaction outTx = mapper.toDomain(source.getId(), command.amount(), TransactionType.TRANSFER_OUT);
+        Transaction feeTx = mapper.toDomain(source.getId(), command.amount(), TransactionType.FEE);
+        Transaction inTx = mapper.toDomain(target.getId(), command.amount(), TransactionType.TRANSFER_IN);
 
         saveTransactionPort.save(outTx);
         saveTransactionPort.save(feeTx);

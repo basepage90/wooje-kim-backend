@@ -26,8 +26,8 @@ public class AccountService implements AccountUseCase {
      * 계좌 등록
      */
     @Override
-    public AccountResult register(RegisterAccountCommand cmd) {
-        Account account = mapper.toRegisterDomain(cmd);
+    public AccountResult register(RegisterAccountCommand command) {
+        Account account = mapper.toRegisterDomain(command);
         Account saved = saveAccountPort.save(account);
         return mapper.toAccountResult(saved);
     }
