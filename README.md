@@ -65,3 +65,52 @@
 - 거래내역 조회 `GET /api/transactions/{transactionId}`  
   - 요청 - transactionId  
   - 응답 - TransactionResponse
+
+---
+### Project Tree Structure
+
+```
+src
+  └── main
+        ├── java.com.wire.remit
+        │     ├── adapter 
+        │     │   ├── in
+        │     │   │   └── web
+        │     │   │       ├── advice
+        │     │   │       ├── controller
+        │     │   │       ├── dto
+        │     │   │       │   ├── request
+        │     │   │       │   └── response
+        │     │   │       └── mapper
+        │     │   └── out
+        │     │       ├── persistence
+        │     │       │   ├── config
+        │     │       │   ├── entity
+        │     │       │   ├── mapper
+        │     │       │   ├── queryRepository
+        │     │       │   │   └── impl
+        │     │       │   └── repository
+        │     │       └── portimpl
+        │     ├── application
+        │     │   ├── dto
+        │     │   │   ├── command
+        │     │   │   ├── query
+        │     │   │   └── result
+        │     │   ├── mapper
+        │     │   ├── port
+        │     │   │   ├── in
+        │     │   │   └── out
+        │     │   │       └── contract
+        │     │   └── service
+        │     ├── domain
+        │     │   ├── account
+        │     │   │   ├── model
+        │     │   │   └── service
+        │     │   ├── common
+        │     │   └── transaction
+        │     │       ├── model
+        │     │       └── service
+        │     └── infrastructure
+        │          └── config
+        └── resources
+```
