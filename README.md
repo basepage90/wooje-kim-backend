@@ -1,5 +1,23 @@
 # Remit Server by Hexagonal Architecture
 
+## 환경
+- java 21
+- spring boot 3.5.6
+- gradle
+- docker
+
+## 라이브러리
+- H2
+  - 인메모리 DB
+- Lombok
+  - 코드 가독성
+- jpa, queryDsl
+  - type safe한 jpa 쿼리
+- OpenAPI(Swagger)
+  - api 명세 및 테스트
+- junit
+  - 테스크 코드
+
 ## 실행
 
 ```bash
@@ -21,6 +39,8 @@
 ## Swagger
 
 - http://localhost:8080/swagger-ui/index.html
+
+---
 
 ## API
 
