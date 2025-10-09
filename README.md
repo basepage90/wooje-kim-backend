@@ -70,7 +70,7 @@
   - 응답 - TransactionResponse
 - 거래내역 조회 `GET /api/transactions/{transactionId}`  
   - 요청 - transactionId  
-  - 응답 - TransactionResponse
+  - 응답 - TransactionHistoryResponse
 
 ---
 ### Project Tree Structure
