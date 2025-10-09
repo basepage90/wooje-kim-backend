@@ -1,5 +1,9 @@
 # Remit Server by Hexagonal Architecture
 
+간단한 송금 서버를 헥사고날 아키텍쳐의 정석에 가깝게 설계하였습니다.  
+실무에 적용한다면 일부 레이어의 DTO를 통합하여,  
+보일러플레이트 코드를 줄이는 방식으로 트레이드 오프 하여 사용 할 수 있겠습니다. 
+
 ## 환경
 - java 21
 - spring boot 3.5.6
@@ -29,6 +33,8 @@
 ```
 
 ## H2 Console
+
+**JDBC URL 변경 필수**
 
 - http://localhost:8080/h2-console
     - Driver Class: org.h2.Driver
