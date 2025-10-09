@@ -16,7 +16,7 @@
 - OpenAPI(Swagger)
   - api 명세 및 테스트
 - junit
-  - 테스크 코드
+  - 테스트 코드
 
 ## 실행
 
