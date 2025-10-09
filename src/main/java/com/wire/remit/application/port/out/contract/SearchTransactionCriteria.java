@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 @Builder
 public record SearchTransactionCriteria(
         Long accountId,
-        LocalDateTime to,
         LocalDateTime from,
+        LocalDateTime to,
         int page,
         int size
 ) {
