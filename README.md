@@ -121,9 +121,8 @@ src
         └── resources
 ```
 ---
-<img width="956" height="470" alt="hexagonal-architecture" src="https://github.com/user-attachments/assets/7cf52219-5a8e-47c8-a21f-54109780ba5c" />
+<img width="956" height="470" alt="hexagonal-architecture" src="https://github.com/user-attachments/assets/7cf52219-5a8e-47c8-a21f-54109780ba5c" />  
 
-<img width="638" height="639" alt="dependencies" src="https://github.com/user-attachments/assets/4988b0b2-4ebb-4ba7-b95c-08376183e163" />
+<img width="638" height="639" alt="dependencies" src="https://github.com/user-attachments/assets/4988b0b2-4ebb-4ba7-b95c-08376183e163" /> 
 
-<caption>이미지 출처 : https://github.com/thombergs/buckpal</caption>
----
+이미지 출처: https://github.com/thombergs/buckpal
